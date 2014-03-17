@@ -1,9 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
 
-#include "src/aaa.h"
 
 int main()
 {
-  aaa();
-  aaa();
   return 0;
 }
