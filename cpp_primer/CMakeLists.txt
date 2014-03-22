@@ -1,0 +1,19 @@
+#method 1:set src list
+INCLUDE_DIRECTORIES(${ZINCDIR})
+LINK_DIRECTORIES(${ZLIBDIR})
+
+SET(EXECUTABLE_OUTPUT_PATH ${ZTOPDIR}/cpp_primer/bin)
+
+SET(SRC_LIST tmain.cc)
+ADD_EXECUTABLE(cpp_primer ${SRC_LIST})
+#TARGET_LINK_LIBRARIES(test1 aaa)
+
+#SET(SRC_LIST2 test2.cc)
+#ADD_EXECUTABLE(test2 ${SRC_LIST2})
+#TARGET_LINK_LIBRARIES(test2 aaa)
+
+
+
+#method 2:all src file in cur dir
+#AUX_SOURCE_DIRECTORY(. DIR_SRCS)
+#ADD_EXECUTABLE(test1 ${DIR_SRCS})
