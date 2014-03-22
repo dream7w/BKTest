@@ -4,7 +4,10 @@ LINK_DIRECTORIES(${ZLIBDIR})
 
 SET(EXECUTABLE_OUTPUT_PATH ${ZTOPDIR}/cpp_primer/bin)
 
-SET(SRC_LIST tmain.cc)
+SET(SRC_LIST  
+      tmain.cc
+      t01_01.cc
+    )
 ADD_EXECUTABLE(cpp_primer ${SRC_LIST})
 TARGET_LINK_LIBRARIES(cpp_primer libgtest.a)
 
