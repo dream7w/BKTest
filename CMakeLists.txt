@@ -2,7 +2,7 @@ PROJECT(HELLO)
 
 ###################create normal dir#####################
 SET(ZTOPDIR ${PROJECT_SOURCE_DIR})
-SET(ZINCDIR ${ZTOPDIR}/gtest-1.7.0/include/gtest)
+SET(ZINCDIR ${ZTOPDIR}/gtest-1.7.0/include)
 SET(ZLIBDIR ${ZTOPDIR}/gtest-1.7.0)
 
 #To create a directory while CMake is configuring your build environment,
@@ -27,3 +27,4 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -lpthread -lrt")
 #lrt:time
 
 ADD_SUBDIRECTORY(test bin)
+ADD_SUBDIRECTORY(cpp_primer bin)

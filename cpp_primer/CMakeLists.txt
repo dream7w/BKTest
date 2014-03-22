@@ -6,7 +6,7 @@ SET(EXECUTABLE_OUTPUT_PATH ${ZTOPDIR}/cpp_primer/bin)
 
 SET(SRC_LIST tmain.cc)
 ADD_EXECUTABLE(cpp_primer ${SRC_LIST})
-#TARGET_LINK_LIBRARIES(test1 aaa)
+TARGET_LINK_LIBRARIES(cpp_primer libgtest.a)
 
 #SET(SRC_LIST2 test2.cc)
 #ADD_EXECUTABLE(test2 ${SRC_LIST2})
