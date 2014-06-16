@@ -30,7 +30,7 @@ add_link_path( ${COMMON_LIBPATH} )
 
 #ADD_SUBDIRECTORY( chp01 )
 	
-build_executable( i2algorithms ../)
+build_executable( linuxapis ../)
 
 
 
