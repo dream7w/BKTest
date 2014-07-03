@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-06-12 02:37:44
+  @Modified    : 2014-07-03 16:20:29
   @Description : 
 ==========================================*/
 
@@ -65,7 +65,7 @@ void InsertionSort(E data[], int length, bool (*compare)(const E &e1, const E &e
 }
 
 template<class E>
-void SelectionSort(E data[], int length, bool (*compare)(const E &e1, const E &e2) = NormalCompare)
+void SelectionSort(E data[], int length, bool (*compare)(const E &e1, const E &e2))
 {
   if (length < 2){return;}
   for (int i = 0; i < length - 1; ++i){
