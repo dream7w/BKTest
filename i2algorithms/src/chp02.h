@@ -3,7 +3,7 @@
   @File        : chp02.h
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:22
-  @Modified    : 2014-07-03 17:53:02
+  @Modified    : 2014-07-03 20:36:16
   @Description : 
 ==========================================*/
 
@@ -27,7 +27,7 @@
  *  return  void
  */
 template<class E>
-void InsertionSort(E data[], int length, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
+void InsertionSort(E data[], int length, int (*compare)(const E &e1, const E &e2) = NormalCompare);
 
 /*
  *  brief   选择排序，从剩余的对象中选择最小人追加到列队末尾
@@ -36,7 +36,7 @@ void InsertionSort(E data[], int length, bool (*compare)(const E &e1, const E &e
  *  return  void
  */
 template<class E>
-void SelectionSort(E data[], int length, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
+void SelectionSort(E data[], int length, int (*compare)(const E &e1, const E &e2) = NormalCompare);
 
 
 
@@ -57,12 +57,17 @@ void BinaryAdd(int a[], int b[], int c[], int length);
  *
  */
 template<class E>
-void MergeSort(E data[], int start, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
+void MergeSort(E data[], int start, int end, int (*compare)(const E &e1, const E &e2) = NormalCompare);
 template<class E>
-void Merge(E data[], E tmp[], int start, int mid, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
+void Merge(E data[], E tmp[], int start, int mid, int end, int (*compare)(const E &e1, const E &e2) = NormalCompare);
 
-
-
+/*
+ *    brief   二分查找法
+ *
+ *
+ */
+template<class E>
+int BinarySearch(const E data[], int start, int end, const E &e, int (*equal)(const E &e1, const E &e2) = NormalCompare);
 
 
 void TestChp02();

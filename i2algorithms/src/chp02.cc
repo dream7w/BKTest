@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-07-03 18:26:04
+  @Modified    : 2014-07-03 20:38:33
   @Description : 
 ==========================================*/
 
@@ -57,7 +57,7 @@ void TestChp02()
 
 
 template<class E>
-void InsertionSort(E data[], int length, bool (*compare)(const E &e1, const E &e2))
+void InsertionSort(E data[], int length, int (*compare)(const E &e1, const E &e2))
 {
   if (length < 2){
     return;
@@ -66,7 +66,7 @@ void InsertionSort(E data[], int length, bool (*compare)(const E &e1, const E &e
   for (int i = 1; i < length; ++i){
     E val = data[i];
     j = i - 1;
-    while (j >= 0 && compare(val, data[j])){
+    while (j >= 0 && compare(val, data[j]) < 0){
       data[j + 1] = data[j];
       j--;
     }
@@ -75,13 +75,13 @@ void InsertionSort(E data[], int length, bool (*compare)(const E &e1, const E &e
 }
 
 template<class E>
-void SelectionSort(E data[], int length, bool (*compare)(const E &e1, const E &e2))
+void SelectionSort(E data[], int length, int (*compare)(const E &e1, const E &e2))
 {
   if (length < 2){return;}
   for (int i = 0; i < length - 1; ++i){
     int k = i;
     for (int j = i + 1; j < length; ++j){
-      k = (compare(data[k], data[j]) ? k : j);
+      k = (compare(data[k], data[j]) < 0 ? k : j);
     }
     if (k != i){
       E val = data[i];
@@ -112,18 +112,18 @@ void BinaryAdd(int a[], int b[], int c[], int length)
 
 
 template<class E>
-void MergeSort(E data[], int start, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare)
+void MergeSort(E data[], int start, int end, int (*compare)(const E &e1, const E &e2) = NormalCompare)
 {
   static E *tmp = new E[end + 1];
   if (start >= end){return;}
   int mid = (start + end) / 2;
   MergeSort(data, start, mid);
   MergeSort(data, mid + 1, end);
-  Merge(data, tmp, start, mid, end);
+  Merge(data, tmp, start, mid, end, compare);
 }
 
 template<class E>
-void Merge(E data[], E tmp[], int start, int mid, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare)
+void Merge(E data[], E tmp[], int start, int mid, int end, int (*compare)(const E &e1, const E &e2) = NormalCompare)
 {
   if (start >= end){return;}
   
@@ -135,7 +135,7 @@ void Merge(E data[], E tmp[], int start, int mid, int end, bool (*compare)(const
   int j = start;
   int k = mid + 1;
   while (j <= mid && k <= end){
-    if (compare(tmp[j], tmp[k])){
+    if (compare(tmp[j], tmp[k]) < 0){
       data[i++] = tmp[j++];
       continue;
     }else{
@@ -147,6 +147,21 @@ void Merge(E data[], E tmp[], int start, int mid, int end, bool (*compare)(const
   }
   while(k <= end){
       data[i++] = tmp[k++];
+  }
+}
+
+template<class E>
+int BinarySearch(const E data[], int start, int end, const E &e, int (*equal)(const E &e1, const E &e2) )
+{
+  int mid = (end - start)/ 2;
+  int eql = equal(data[mid], e);
+  if (start > end){ return -1; }
+  if (0 == eql){
+    return mid;
+  }else if (eql < 0){
+    return BinarySearch(data, start, mid);
+  }else{
+    return BinarySearch(data, mid + 1, end);
   }
 }
 

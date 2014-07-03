@@ -3,7 +3,7 @@
   @File        : comm_def.h
   @Encoding    : utf-8
   @Create      : 2014-06-12 01:16:47
-  @Modified    : 2014-06-12 02:15:40
+  @Modified    : 2014-07-03 20:25:13
   @Description : 
 ==========================================*/
 
@@ -22,9 +22,14 @@
  *  return
  */
 template<class E>
-bool NormalCompare(const E &e1, const E &e2)
+int NormalCompare(const E &e1, const E &e2)
 {
-  return e1 < e2;
+  if (e1 < e2) {
+    return -1;
+  }else if (e1 > e2){
+    return 1;
+  }
+  return 0;
 }
 
 /*
