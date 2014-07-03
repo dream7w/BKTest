@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-07-03 20:38:33
+  @Modified    : 2014-07-03 20:51:41
   @Description : 
 ==========================================*/
 
@@ -153,6 +153,7 @@ void Merge(E data[], E tmp[], int start, int mid, int end, int (*compare)(const 
 template<class E>
 int BinarySearch(const E data[], int start, int end, const E &e, int (*equal)(const E &e1, const E &e2) )
 {
+#if 0
   int mid = (end - start)/ 2;
   int eql = equal(data[mid], e);
   if (start > end){ return -1; }
@@ -163,6 +164,20 @@ int BinarySearch(const E data[], int start, int end, const E &e, int (*equal)(co
   }else{
     return BinarySearch(data, mid + 1, end);
   }
+#else
+  while (start <= end){
+    int mid = (end - start)/ 2;
+    int eql = equal(data[mid], e);
+    if (0 == eql){
+      return mid;
+    }else if (eql < 0){
+      end = mid;
+    }else{
+      start = mid + 1;
+    }
+  }
+  return -1;
+#endif
 }
 
 
