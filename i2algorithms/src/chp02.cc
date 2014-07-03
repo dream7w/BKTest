@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-07-03 17:45:37
+  @Modified    : 2014-07-03 18:26:04
   @Description : 
 ==========================================*/
 
@@ -28,6 +28,16 @@ void TestChp02()
     SelectionSort(data, length);
     NormalPrint("data:",data, length, "");
   }
+  {
+    printf("MerageSort\n:");
+    int data[] = {1,3,6,4,2,5,8,4};
+    int length = sizeof(data) / sizeof(int);
+    NormalPrint("data:",data, length, "");
+    MergeSort<int>(data, 0, length - 1);
+    NormalPrint("data:",data, length, "");
+  }
+
+
 
   {
     printf("BinaryAdd\n:");
@@ -123,7 +133,7 @@ void Merge(E data[], E tmp[], int start, int mid, int end, bool (*compare)(const
 
   int i = start;
   int j = start;
-  int k = mid;
+  int k = mid + 1;
   while (j <= mid && k <= end){
     if (compare(tmp[j], tmp[k])){
       data[i++] = tmp[j++];

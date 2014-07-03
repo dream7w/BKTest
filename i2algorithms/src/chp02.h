@@ -3,7 +3,7 @@
   @File        : chp02.h
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:22
-  @Modified    : 2014-07-03 17:03:26
+  @Modified    : 2014-07-03 17:53:02
   @Description : 
 ==========================================*/
 
@@ -59,7 +59,7 @@ void BinaryAdd(int a[], int b[], int c[], int length);
 template<class E>
 void MergeSort(E data[], int start, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
 template<class E>
-void Merge(E data[], int start, int mid, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
+void Merge(E data[], E tmp[], int start, int mid, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
 
 
 
