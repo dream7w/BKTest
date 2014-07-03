@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-07-03 16:20:29
+  @Modified    : 2014-07-03 17:45:37
   @Description : 
 ==========================================*/
 
@@ -97,3 +97,62 @@ void BinaryAdd(int a[], int b[], int c[], int length)
   }
   c[0] = flag;
 }
+
+
+
+
+template<class E>
+void MergeSort(E data[], int start, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare)
+{
+  static E *tmp = new E[end + 1];
+  if (start >= end){return;}
+  int mid = (start + end) / 2;
+  MergeSort(data, start, mid);
+  MergeSort(data, mid + 1, end);
+  Merge(data, tmp, start, mid, end);
+}
+
+template<class E>
+void Merge(E data[], E tmp[], int start, int mid, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare)
+{
+  if (start >= end){return;}
+  
+  for (int i = start; i <= end; ++i){
+    tmp[i] = data[i];
+  }
+
+  int i = start;
+  int j = start;
+  int k = mid;
+  while (j <= mid && k <= end){
+    if (compare(tmp[j], tmp[k])){
+      data[i++] = tmp[j++];
+      continue;
+    }else{
+      data[i++] = tmp[k++];
+    }
+  }
+  while(j <= mid){
+      data[i++] = tmp[j++];
+  }
+  while(k <= end){
+      data[i++] = tmp[k++];
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

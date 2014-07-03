@@ -3,7 +3,7 @@
   @File        : chp02.h
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:22
-  @Modified    : 2014-07-03 16:22:54
+  @Modified    : 2014-07-03 17:03:26
   @Description : 
 ==========================================*/
 
@@ -20,7 +20,8 @@
  */
 
 /*
- *  brief   插入排序,n(2),增量方法
+ *  brief   插入排序,n(2),
+ *          增量方法(incremental):插入到已有的排序当中
  *  input   data[], length of data
  *  output  data[]
  *  return  void
@@ -29,7 +30,7 @@ template<class E>
 void InsertionSort(E data[], int length, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
 
 /*
- *  brief   选择排序
+ *  brief   选择排序，从剩余的对象中选择最小人追加到列队末尾
  *  input   data[], length of data
  *  output  data[]
  *  return  void
@@ -46,6 +47,22 @@ void SelectionSort(E data[], int length, bool (*compare)(const E &e1, const E &e
  *  output  c
  */
 void BinaryAdd(int a[], int b[], int c[], int length);
+
+
+/*
+ *  brief   合并排序(merge sort)
+ *          分治法(divide-and-conquer(分而治之))
+ *
+ *
+ *
+ */
+template<class E>
+void MergeSort(E data[], int start, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
+template<class E>
+void Merge(E data[], int start, int mid, int end, bool (*compare)(const E &e1, const E &e2) = NormalCompare);
+
+
+
 
 
 void TestChp02();
