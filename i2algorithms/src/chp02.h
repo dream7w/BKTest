@@ -3,7 +3,7 @@
   @File        : chp02.h
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:22
-  @Modified    : 2014-07-04 10:45:52
+  @Modified    : 2014-07-04 10:54:12
   @Description : 
 ==========================================*/
 
@@ -69,6 +69,17 @@ void Merge(E data[], E tmp[], int start, int mid, int end, int (*compare)(const 
  */
 template<class E>
 void MergeInsertionSort(E data[], int start, int end, int insert_sort_size, int (*compare)(const E &e1, const E &e2) = NormalCompare);
+
+/*
+ *  brief   冒泡排序
+ *  
+ *
+ *
+ */
+template<class E>
+void BubbleSort(E data[], int length, int (*compare)(const E &e1, const E &e2) = NormalCompare);
+
+
 
 
 /*

@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-07-04 10:49:10
+  @Modified    : 2014-07-04 10:57:53
   @Description : 
 ==========================================*/
 
@@ -14,7 +14,7 @@ void TestChp02()
 {
   {
     printf("InsertionSort\n:");
-    int data[] = {1,3,6,4,2,5,8,4};
+    int data[] = {1,3,6,4,2,5,8,4,2,5,6,7,8,2,5,9};
     int length = sizeof(data) / sizeof(int);
     NormalPrint("data:",data, length, "");
     InsertionSort(data, length);
@@ -22,7 +22,7 @@ void TestChp02()
   }
   {
     printf("SelectionSort\n:");
-    int data[] = {1,3,6,4,2,5,8,4};
+    int data[] = {1,3,6,4,2,5,8,4,2,5,6,7,8,2,5,9};
     int length = sizeof(data) / sizeof(int);
     NormalPrint("data:",data, length, "");
     SelectionSort(data, length);
@@ -30,7 +30,7 @@ void TestChp02()
   }
   {
     printf("MerageSort\n:");
-    int data[] = {1,3,6,4,2,5,8,4};
+    int data[] = {1,3,6,4,2,5,8,4,2,5,6,7,8,2,5,9};
     int length = sizeof(data) / sizeof(int);
     NormalPrint("data:",data, length, "");
     MergeSort<int>(data, 0, length - 1);
@@ -44,6 +44,15 @@ void TestChp02()
     MergeInsertionSort<int>(data, 0, length - 1, 3);
     NormalPrint("data:",data, length, "");
   }
+  {
+    printf("BubbleSort\n:");
+    int data[] = {1,3,6,4,2,5,8,4,2,5,6,7,8,2,5,9};
+    int length = sizeof(data) / sizeof(int);
+    NormalPrint("data:",data, length, "");
+    BubbleSort<int>(data, length);
+    NormalPrint("data:",data, length, "");
+  }
+
 
 
 
@@ -173,6 +182,22 @@ void MergeInsertionSort(E data[], int start, int end, int insert_sort_size, int 
   MergeSort(data, start, mid);
   MergeSort(data, mid + 1, end);
   Merge(data, tmp, start, mid, end, compare);
+}
+
+template<class E>
+void BubbleSort(E data[], int length, int (*compare)(const E &e1, const E &e2) = NormalCompare)
+{
+  if (length < 2){return;}
+  E tmp;
+  for (int i = 0; i < length; ++i){
+    for (int j = length - 1; j > i; --j){
+      if (NormalCompare(data[j], data[j-1]) < 0){
+        tmp = data[j];
+        data[j] = data[j - 1];
+        data[j - 1] = tmp;
+      }
+    }
+  }
 }
 
 
