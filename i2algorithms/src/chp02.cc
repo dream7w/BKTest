@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-07-04 10:57:53
+  @Modified    : 2014-07-04 11:53:03
   @Description : 
 ==========================================*/
 
@@ -191,7 +191,7 @@ void BubbleSort(E data[], int length, int (*compare)(const E &e1, const E &e2) =
   E tmp;
   for (int i = 0; i < length; ++i){
     for (int j = length - 1; j > i; --j){
-      if (NormalCompare(data[j], data[j-1]) < 0){
+      if (compare(data[j], data[j-1]) < 0){
         tmp = data[j];
         data[j] = data[j - 1];
         data[j - 1] = tmp;

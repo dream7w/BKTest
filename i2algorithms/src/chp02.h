@@ -3,7 +3,7 @@
   @File        : chp02.h
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:22
-  @Modified    : 2014-07-04 10:54:12
+  @Modified    : 2014-07-04 11:55:02
   @Description : 
 ==========================================*/
 
@@ -30,7 +30,7 @@ template<class E>
 void InsertionSort(E data[], int length, int (*compare)(const E &e1, const E &e2) = NormalCompare);
 
 /*
- *  brief   选择排序，从剩余的对象中选择最小人追加到列队末尾
+ *  brief   选择排序,n(2),从剩余的对象中选择最小人追加到列队末尾
  *  input   data[], length of data
  *  output  data[]
  *  return  void
@@ -50,10 +50,8 @@ void BinaryAdd(int a[], int b[], int c[], int length);
 
 
 /*
- *  brief   合并排序(merge sort)
+ *  brief   合并排序(merge sort),nlog(n)
  *          分治法(divide-and-conquer(分而治之))
- *
- *
  *
  */
 template<class E>
@@ -62,9 +60,7 @@ template<class E>
 void Merge(E data[], E tmp[], int start, int mid, int end, int (*compare)(const E &e1, const E &e2) = NormalCompare);
 
 /*
- *  brief   合并插入排序
- *  
- *
+ *  brief   合并插入排序, 
  *
  */
 template<class E>
