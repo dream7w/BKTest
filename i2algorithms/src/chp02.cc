@@ -3,7 +3,7 @@
   @File        : chp02.cc
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:34
-  @Modified    : 2014-07-03 20:51:41
+  @Modified    : 2014-07-04 10:49:10
   @Description : 
 ==========================================*/
 
@@ -36,6 +36,15 @@ void TestChp02()
     MergeSort<int>(data, 0, length - 1);
     NormalPrint("data:",data, length, "");
   }
+  {
+    printf("MergeInsertionSort\n:");
+    int data[] = {1,3,6,4,2,5,8,4,2,5,6,7,8,2,5,9};
+    int length = sizeof(data) / sizeof(int);
+    NormalPrint("data:",data, length, "");
+    MergeInsertionSort<int>(data, 0, length - 1, 3);
+    NormalPrint("data:",data, length, "");
+  }
+
 
 
 
@@ -149,6 +158,23 @@ void Merge(E data[], E tmp[], int start, int mid, int end, int (*compare)(const 
       data[i++] = tmp[k++];
   }
 }
+
+
+template<class E>
+void MergeInsertionSort(E data[], int start, int end, int insert_sort_size, int (*compare)(const E &e1, const E &e2) = NormalCompare)
+{
+  static E *tmp = new E[end + 1];
+  if (start >= end){return;}
+  if (end - start <= insert_sort_size){
+    InsertionSort(&data[start], end - start + 1);
+    return;
+  }
+  int mid = (start + end) / 2;
+  MergeSort(data, start, mid);
+  MergeSort(data, mid + 1, end);
+  Merge(data, tmp, start, mid, end, compare);
+}
+
 
 template<class E>
 int BinarySearch(const E data[], int start, int end, const E &e, int (*equal)(const E &e1, const E &e2) )

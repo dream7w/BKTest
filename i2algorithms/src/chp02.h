@@ -3,7 +3,7 @@
   @File        : chp02.h
   @Encoding    : utf-8
   @Create      : 2014-06-11 23:07:22
-  @Modified    : 2014-07-03 20:36:16
+  @Modified    : 2014-07-04 10:45:52
   @Description : 
 ==========================================*/
 
@@ -60,6 +60,16 @@ template<class E>
 void MergeSort(E data[], int start, int end, int (*compare)(const E &e1, const E &e2) = NormalCompare);
 template<class E>
 void Merge(E data[], E tmp[], int start, int mid, int end, int (*compare)(const E &e1, const E &e2) = NormalCompare);
+
+/*
+ *  brief   合并插入排序
+ *  
+ *
+ *
+ */
+template<class E>
+void MergeInsertionSort(E data[], int start, int end, int insert_sort_size, int (*compare)(const E &e1, const E &e2) = NormalCompare);
+
 
 /*
  *    brief   二分查找法
