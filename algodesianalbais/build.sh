@@ -1,5 +1,5 @@
 #!/bin/sh
-ori_path=`pwc`
+ori_path=`pwd`
 cd ./build
 cmake .
 make
