@@ -3,7 +3,7 @@
   @File        : datastrualgoanal/src/chp09.cc
   @Encoding    : utf-8
   @Create      : 2014-07-10 14:45:48
-  @Modified    : 2014-07-11 14:02:46
+  @Modified    : 2014-07-11 14:46:34
   @Description : 
 ==========================================*/
 
@@ -69,6 +69,10 @@ bool GraphArray::TopSort(std::vector<int> &out)
   return true;
 }
 
+bool GraphArray::BreadthFirstSearch(std::vector<int> &out)
+{
+  
+}
 
 GraphList::GraphList()
   :v(0), e(0), data(NULL)
@@ -83,7 +87,7 @@ GraphList::~GraphList()
 GraphList::GraphList(int v)
   :v(0), e(v), data(NULL)
 {
-    data = new std::list<int>[v];
+    data = new std::list<E>[v];
 };
 
 bool GraphList::TopSort(std::vector<int> &out)
@@ -92,8 +96,8 @@ bool GraphList::TopSort(std::vector<int> &out)
   std::vector<int> vec_indegree;
   vec_indegree.resize(v);
   for (int i = 0; i < v; ++i){
-    for (std::list<int>::iterator it = data[i].begin(); it != data[i].end(); ++it){
-      vec_indegree[*it] += 1;
+    for (std::list<E>::iterator it = data[i].begin(); it != data[i].end(); ++it){
+      vec_indegree[(*it).k] += 1;
     }
   }
 
@@ -107,15 +111,20 @@ bool GraphList::TopSort(std::vector<int> &out)
     int id = zero_queue.front();
     zero_queue.pop_front();
     out.push_back((int)id);
-    for (std::list<int>::iterator it = data[id].begin(); it != data[id].end(); ++it){
-      vec_indegree[*it] -= 1;
-      if (vec_indegree[*it] == 0){
-        zero_queue.push_back(*it);
+    for (std::list<E>::iterator it = data[id].begin(); it != data[id].end(); ++it){
+      vec_indegree[(*it).k] -= 1;
+      if (vec_indegree[(*it).k] == 0){
+        zero_queue.push_back((*it).k);
       }
     }
   }
 
   return true;
+}
+
+bool GraphArray::BreadthFirstSearch(std::vector<int> &out)
+{
+
 }
 
 
