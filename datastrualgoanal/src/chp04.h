@@ -3,13 +3,16 @@
   @File        : src/chp04.h
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:30
-  @Modified    : 2014-07-17 16:46:26
+  @Modified    : 2014-07-17 18:21:24
   @Description : 树(tree)
 ==========================================*/
 
 /*
 1,树的大部分操作都是O(logN)
-2,二叉查找树(binary search tree),应用于set与map,平均深度O(logN)
+2,二叉查找树(binary search tree),应用于set与map,
+  左子树小于根值，右子树大于根值
+  由于树的递归定义,通常递归地编写操作例程,
+  由于平均深度O(logN),不必担心栈被耗尽.
 3,深度(depth),从根到ni的路径长度,根的深度为0
 4,高,从ni到树叶的最长路径长度,叶子的高为0
 5,先序遍历:先根后子
@@ -93,5 +96,19 @@ class ExpressionTree : public BinaryTree<char>
 };
 
 
+template<class E>
+class BinarySearchTree : public BinaryTree<E>
+{
+  public:
+    BinarySearchTree();
+    ~BinarySearchTree();
+
+  public:
+    Node *Insert(const E &e, Node *tree);
+    void Delete(const E &e, Node *tree);
+    bool Contrain(const E &e, Node *tree);
+    Node *FindMin(Node *tree);
+    Node *FindMax(Node *tree);
+};
 
 #endif//SRC_CHP04_H_

@@ -3,7 +3,7 @@
   @File        : src/chp04.cc
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:39
-  @Modified    : 2014-07-17 17:22:36
+  @Modified    : 2014-07-17 18:28:21
   @Description : 
 ==========================================*/
 
@@ -26,6 +26,10 @@ Tree<E>::~Tree()
 template<class E>
 void Tree<E>::FirstIterator(Node *tree)
 {
+  if (NULL == tree){
+    return;
+  }
+ 
   VisitNode(tree);
   FirstIterator(tree->child);
   Node *node = tree->sibling;
@@ -39,6 +43,10 @@ void Tree<E>::FirstIterator(Node *tree)
 template<class E>
 void Tree<E>::LastIterator(Node *tree)
 {
+  if (NULL == tree){
+    return;
+  }
+ 
   FirstIterator(tree->child);
   Node *node = tree->sibling;
   while(node){
@@ -52,6 +60,10 @@ void Tree<E>::LastIterator(Node *tree)
 template<class E>
 void Tree<E>::VisitNode(Node *node)
 {
+  if (NULL == tree){
+    return;
+  }
+ 
   node->Visit();
 }
 
@@ -83,6 +95,9 @@ BinaryTree<E>::~BinaryTree()
 template<class E>
 void BinaryTree<E>::FirstIterator(Node *tree)
 {
+  if (NULL == tree){
+    return;
+  }
   VisitNode(tree);
   FirstIterator(tree->left);
   FirstIterator(tree->right);
@@ -91,6 +106,9 @@ void BinaryTree<E>::FirstIterator(Node *tree)
 template<class E>
 void BinaryTree<E>::LastIterator(Node *tree)
 {
+  if (NULL == tree){
+    return;
+  }
   FirstIterator(tree->left);
   FirstIterator(tree->right);
   VisitNode(tree);
@@ -99,6 +117,9 @@ void BinaryTree<E>::LastIterator(Node *tree)
 template<class E>
 void BinaryTree<E>::MiddleIterator(Node *tree)
 {
+  if (NULL == tree){
+    return;
+  }
   FirstIterator(tree->left);
   VisitNode(tree);
   FirstIterator(tree->right);
@@ -155,4 +176,92 @@ void ExpressionTree::LastIterBuild(const char *expr)
     tree_ = node_stack.top();
   }
 }
+
+
+
+
+
+
+
+
+
+template<class E>
+BinarySearchTree<E>::BinarySearchTree()
+{
+
+}
+
+template<class E>
+BinarySearchTree<E>::~BinarySearchTree()
+{
+
+}
+
+
+template<class E>
+Node *BinarySearchTree<E>::Insert(const E &e, Node *tree);
+{
+
+}
+
+template<class E>
+void BinarySearchTree<E>::Delete(const E &e, Node *tree)
+{
+
+}
+
+template<class E>
+bool BinarySearchTree<E>::Contrain(const E &e, Node *tree)
+{
+  if (NULL == tree){
+    return false;
+  }else if (tree->e == e){
+    return true;
+  }else if (tree->e < e){
+    return Contrain(e, tree->left);
+  }else{
+    return Contrain(e, tree->right);
+  }
+}
+
+template<class E>
+Node *BinarySearchTree<E>::FindMin(Node *tree);
+{
+  if (NULL == tree){
+    return NULL;
+  }
+ 
+  Node *node = tree;
+  while (node->left){
+    node = node->left;
+  }
+  return node;
+}
+
+template<class E>
+Node *BinarySearchTree<E>::FindMax(Node *tree)
+{
+  if (NULL == tree){
+    return NULL;
+  }
+  Node *node = tree;
+  while (node->right){
+    node = node->right;
+  }
+  return node;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
