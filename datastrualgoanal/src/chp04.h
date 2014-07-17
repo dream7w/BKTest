@@ -3,7 +3,7 @@
   @File        : src/chp04.h
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:30
-  @Modified    : 2014-07-17 16:00:45
+  @Modified    : 2014-07-17 16:46:26
   @Description : 树(tree)
 ==========================================*/
 
@@ -16,7 +16,7 @@
   中序遍历:先左再根再右
   后序遍历:先子后根
 6,二叉树(binary tree),儿子不多于两个,平均深度O(sqrt(N))
-7,表达式树,叶子是操作数,节点为操作符
+7,表达式树,叶子是操作数,节点为操作符,二叉树中序遍历
 */
 
 #ifndef SRC_CHP04_H_
@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <deque>
+#include <stack>
 
 
 template<class E>
@@ -37,7 +38,6 @@ class Tree
       E e;
       Node *child;
       Node *sibling;
-      void Visit();
     };
 
   public:
@@ -45,9 +45,10 @@ class Tree
     ~Tree();
 
   public:
+    virtual void VisitNode(Node *node);
+
     void FirstIterator(Node *tree);
     void LastIterator(Node *tree);
-    void VisitNode(Node *node);
 
 };
 
@@ -61,7 +62,7 @@ class BinaryTree
       E e;
       Node *left;
       Node *right;
-      void Visit();
+      Node():left(NULL), right(NULL){};
     };
 
   public:
@@ -69,10 +70,26 @@ class BinaryTree
     ~BinaryTree();
 
   public:
+    virtual void VisitNode(Node *node);
+
     void FirstIterator(Node *tree);
     void LastIterator(Node *tree);
-    void VisitNode(Node *node);
+    void MiddleIterator(Node *tree);
+    
+  protected:
+    Node *tree_;
+};
 
+class ExpressionTree : public BinaryTree<char>
+{
+  public:
+    ExpressionTree();
+    ~ExpressionTree();
+
+    virtual void VisitNode(Node *node);
+
+  public:
+    void LastIterBuild(const char *expr);
 };
 
 
