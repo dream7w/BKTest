@@ -3,7 +3,7 @@
   @File        : src/chp04.cc
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:39
-  @Modified    : 2014-07-17 15:32:02
+  @Modified    : 2014-07-17 16:02:27
   @Description : 
 ==========================================*/
 
@@ -31,22 +31,28 @@ Tree<E>::~Tree()
 template<class E>
 void Tree<E>::FirstIterator(Node *tree)
 {
-  if (NULL == tree){return;}
-  std::deque<Node*> child;
-  Node *node = tree;
-  child.push_bakc(node);
-  while (!child.empty()){
-    node = child.front();
-    child.pop_front();
-    while(node){
-      VisitNode(node);
-      if (node->child){
-        child.push_back(node->child);
-      }
-      node = node->sibling;
-    }
+  VisitNode(tree);
+  FirstIterator(tree->child);
+  Node *node = tree->sibling;
+  while(node){
+    FirstIterator(node);
+    node = node->sibling;
   }
 }
+
+
+template<class E>
+void Tree<E>::LastIterator(Node *tree)
+{
+  FirstIterator(tree->child);
+  Node *node = tree->sibling;
+  while(node){
+    FirstIterator(node);
+    node = node->sibling;
+  } 
+  VisitNode(tree);
+}
+ 
 
 template<class E>
 void Tree<E>::VisitNode(Node *node)
@@ -56,5 +62,53 @@ void Tree<E>::VisitNode(Node *node)
 
 
 
+
+
+
+
+
+
+
+
+
+template<class E>
+void BinaryTree<E>::Node::Visit()
+{
+  
+}
+
+template<class E>
+BinaryTree<E>::BinaryTree()
+{
+
+}
+
+template<class E>
+BinaryTree<E>::~BinaryTree()
+{
+
+}
+
+template<class E>
+void BinaryTree<E>::FirstIterator(Node *tree)
+{
+  VisitNode(tree);
+  FirstIterator(tree->left);
+  FirstIterator(tree->right);
+}
+
+template<class E>
+void BinaryTree<E>::LastIterator(Node *tree)
+{
+  FirstIterator(tree->left);
+  FirstIterator(tree->right);
+  VisitNode(tree);
+}
+
+template<class E>
+void BinaryTree<E>::VisitNode(Node *node)
+{
+  node->Visit();
+}
 
 
