@@ -3,7 +3,7 @@
   @File        : datastrualgoanal/src/chp09.cc
   @Encoding    : utf-8
   @Create      : 2014-07-10 14:45:48
-  @Modified    : 2014-07-11 14:46:34
+  @Modified    : 2014-07-17 10:47:17
   @Description : 
 ==========================================*/
 
@@ -71,7 +71,7 @@ bool GraphArray::TopSort(std::vector<int> &out)
 
 bool GraphArray::BreadthFirstSearch(std::vector<int> &out)
 {
-  
+  return true;  
 }
 
 GraphList::GraphList()
@@ -122,9 +122,9 @@ bool GraphList::TopSort(std::vector<int> &out)
   return true;
 }
 
-bool GraphArray::BreadthFirstSearch(std::vector<int> &out)
+bool GraphList::BreadthFirstSearch(std::vector<int> &out)
 {
-
+  return true;
 }
 
 
