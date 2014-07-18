@@ -3,7 +3,7 @@
   @File        : src/chp04.h
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:30
-  @Modified    : 2014-07-17 18:21:24
+  @Modified    : 2014-07-18 14:51:30
   @Description : 树(tree)
 ==========================================*/
 
@@ -32,7 +32,7 @@
 #include <stack>
 
 
-template<class E>
+template<typename E>
 class Tree
 {
   public:
@@ -56,7 +56,7 @@ class Tree
 };
 
 
-template<class E>
+template<typename E>
 class BinaryTree
 {
   public:
@@ -79,6 +79,22 @@ class BinaryTree
     void LastIterator(Node *tree);
     void MiddleIterator(Node *tree);
     
+    void Release(Node *&tree);
+    void Release();
+
+    BinaryTree& operator = (const BinaryTree& bt);
+
+    Node *Clone(const Node *node) {
+      if (NULL == node){
+        return NULL;
+      }
+      Node *new_node = new Node();
+      new_node->e = node->e;
+      new_node->left = Clone(node->left);
+      new_node->right = Clone(node->right);
+      return new_node;
+    }
+
   protected:
     Node *tree_;
 };
@@ -96,19 +112,59 @@ class ExpressionTree : public BinaryTree<char>
 };
 
 
-template<class E>
+template<typename E>
 class BinarySearchTree : public BinaryTree<E>
 {
   public:
+    //********************************************
+    typedef typename BinaryTree<E>::Node Node;
+    //********************************************
+    
     BinarySearchTree();
     ~BinarySearchTree();
 
   public:
-    Node *Insert(const E &e, Node *tree);
+    Node *Insert(const E &e, Node *tree){
+      if (NULL = tree){
+        Node *new_node = new Node;
+        new_node->e = e;
+        new_node->left = NULL;
+        new_node->right = NULL;
+        return new_node;
+      }
+      if (e > tree->e){
+        tree->right = Insert(e, tree->right);
+      }else if (e < tree->e){
+        tree->left = Insert(e, tree->left);
+      }
+      return tree;
+    }
+
     void Delete(const E &e, Node *tree);
+
     bool Contrain(const E &e, Node *tree);
-    Node *FindMin(Node *tree);
-    Node *FindMax(Node *tree);
+
+    Node *FindMin(Node *tree){
+      if (NULL == tree){
+        return NULL;
+      }
+      Node *node = tree;
+      while (node->left){
+        node = node->left;
+      }
+      return node;
+    }
+
+    Node *FindMax(Node *tree){
+      if (NULL == tree){
+        return NULL;
+      }
+      Node *node = tree;
+      while (node->right){
+        node = node->right;
+      }
+      return node;
+    }
 };
 
 #endif//SRC_CHP04_H_
