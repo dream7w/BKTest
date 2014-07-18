@@ -3,7 +3,7 @@
   @File        : src/chp04.h
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:30
-  @Modified    : 2014-07-18 14:51:30
+  @Modified    : 2014-07-18 17:17:59
   @Description : 树(tree)
 ==========================================*/
 
@@ -20,6 +20,7 @@
   后序遍历:先子后根
 6,二叉树(binary tree),儿子不多于两个,平均深度O(sqrt(N))
 7,表达式树,叶子是操作数,节点为操作符,二叉树中序遍历
+8,二叉平衡树,任一节点的左右子树的高最多相差1,通过旋转(rotation)来修平衡
 */
 
 #ifndef SRC_CHP04_H_
@@ -33,16 +34,17 @@
 
 
 template<typename E>
+struct TreeNode
+{
+  E e;
+  TreeNode *child;
+  TreeNode *sibling;
+};
+
+
+template<typename Element, typename Node>
 class Tree
 {
-  public:
-    struct Node
-    {
-      E e;
-      Node *child;
-      Node *sibling;
-    };
-
   public:
     Tree();
     ~Tree();
@@ -56,18 +58,20 @@ class Tree
 };
 
 
+
 template<typename E>
+struct BinaryTreeNode
+{
+  E e;
+  BinaryTreeNode *left;
+  BinaryTreeNode *right;
+};
+
+
+
+template<typename Element, typename Node>
 class BinaryTree
 {
-  public:
-    struct Node
-    {
-      E e;
-      Node *left;
-      Node *right;
-      Node():left(NULL), right(NULL){};
-    };
-
   public:
     BinaryTree();
     ~BinaryTree();
@@ -99,32 +103,35 @@ class BinaryTree
     Node *tree_;
 };
 
-class ExpressionTree : public BinaryTree<char>
+
+
+struct ExpressionTreeNode : public BinaryTreeNode<char>
+{
+};
+
+
+class ExpressionTree : public BinaryTree<char, ExpressionTreeNode>
 {
   public:
     ExpressionTree();
     ~ExpressionTree();
 
-    virtual void VisitNode(Node *node);
+    virtual void VisitNode(ExpressionTreeNode *node);
 
   public:
     void LastIterBuild(const char *expr);
 };
 
 
-template<typename E>
-class BinarySearchTree : public BinaryTree<E>
+template<typename Element, typename Node>
+class BinarySearchTree : public BinaryTree<Element, Node>
 {
   public:
-    //********************************************
-    typedef typename BinaryTree<E>::Node Node;
-    //********************************************
-    
     BinarySearchTree();
     ~BinarySearchTree();
 
   public:
-    Node *Insert(const E &e, Node *tree){
+    Node *Insert(const Element &e, Node *tree){
       if (NULL = tree){
         Node *new_node = new Node;
         new_node->e = e;
@@ -140,9 +147,9 @@ class BinarySearchTree : public BinaryTree<E>
       return tree;
     }
 
-    void Delete(const E &e, Node *tree);
+    void Delete(const Element &e, Node *tree);
 
-    bool Contrain(const E &e, Node *tree);
+    bool Contrain(const Element &e, Node *tree);
 
     Node *FindMin(Node *tree){
       if (NULL == tree){
@@ -166,5 +173,18 @@ class BinarySearchTree : public BinaryTree<E>
       return node;
     }
 };
+
+
+
+template<typename Element, typename Node>
+class AVLTree : public BinarySearchTree<Element, Node>
+{
+  public: 
+    AVLTree();
+    ~AVLTree();
+
+};
+
+
 
 #endif//SRC_CHP04_H_

@@ -3,7 +3,7 @@
   @File        : src/chp04.cc
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:39
-  @Modified    : 2014-07-18 14:51:38
+  @Modified    : 2014-07-18 17:20:34
   @Description : 
 ==========================================*/
 
@@ -11,20 +11,20 @@
 #include "chp04.h"
 
 
-template<class E>
-Tree<E>::Tree()
+template<typename Element, typename Node>
+Tree<Element,Node>::Tree()
 {
 
 }
 
-template<class E>
-Tree<E>::~Tree()
+template<typename Element, typename Node>
+Tree<Element,Node>::~Tree()
 {
 
 }
 
-template<class E>
-void Tree<E>::FirstIterator(Node *tree)
+template<typename Element, typename Node>
+void Tree<Element,Node>::FirstIterator(Node *tree)
 {
   if (NULL == tree){
     return;
@@ -40,8 +40,8 @@ void Tree<E>::FirstIterator(Node *tree)
 }
 
 
-template<class E>
-void Tree<E>::LastIterator(Node *tree)
+template<typename Element, typename Node>
+void Tree<Element,Node>::LastIterator(Node *tree)
 {
   if (NULL == tree){
     return;
@@ -57,8 +57,8 @@ void Tree<E>::LastIterator(Node *tree)
 }
  
 
-template<class E>
-void Tree<E>::VisitNode(Node *node)
+template<typename Element, typename Node>
+void Tree<Element,Node>::VisitNode(Node *node)
 {
   if (NULL != node){
     node->Visit();
@@ -77,21 +77,21 @@ void Tree<E>::VisitNode(Node *node)
 
 
 
-template<class E>
-BinaryTree<E>::BinaryTree()
+template<typename Element, typename Node>
+BinaryTree<Element, Node>::BinaryTree()
   : tree_(NULL)
 {
 
 }
 
-template<class E>
-BinaryTree<E>::~BinaryTree()
+template<typename Element, typename Node>
+BinaryTree<Element,Node>::~BinaryTree()
 {
   Release(tree_);
 }
 
-template<class E>
-void BinaryTree<E>::FirstIterator(Node *tree)
+template<typename Element, typename Node>
+void BinaryTree<Element,Node>::FirstIterator(Node *tree)
 {
   if (NULL == tree){
     return;
@@ -101,8 +101,8 @@ void BinaryTree<E>::FirstIterator(Node *tree)
   FirstIterator(tree->right);
 }
 
-template<class E>
-void BinaryTree<E>::LastIterator(Node *tree)
+template<typename Element, typename Node>
+void BinaryTree<Element,Node>::LastIterator(Node *tree)
 {
   if (NULL == tree){
     return;
@@ -112,8 +112,8 @@ void BinaryTree<E>::LastIterator(Node *tree)
   VisitNode(tree);
 }
 
-template<class E>
-void BinaryTree<E>::MiddleIterator(Node *tree)
+template<typename Element, typename Node>
+void BinaryTree<Element,Node>::MiddleIterator(Node *tree)
 {
   if (NULL == tree){
     return;
@@ -123,8 +123,8 @@ void BinaryTree<E>::MiddleIterator(Node *tree)
   FirstIterator(tree->right);
 }
 
-template<class E>
-void BinaryTree<E>::Release(Node *&tree)
+template<typename Element, typename Node>
+void BinaryTree<Element,Node>::Release(Node *&tree)
 {
   if (NULL != tree){
     Release(tree->left);
@@ -134,8 +134,8 @@ void BinaryTree<E>::Release(Node *&tree)
   }
 }
 
-template<class E>
-BinaryTree<E>& BinaryTree<E>::operator = (const BinaryTree<E>& bt)
+template<typename Element, typename Node>
+BinaryTree<Element,Node>& BinaryTree<Element,Node>::operator = (const BinaryTree<Element,Node>& bt)
 {
   if (this == &bt){
     return *this;
@@ -145,8 +145,8 @@ BinaryTree<E>& BinaryTree<E>::operator = (const BinaryTree<E>& bt)
   return *this;
 }
 
-template<class E>
-void BinaryTree<E>::VisitNode(Node *node)
+template<typename Element, typename Node>
+void BinaryTree<Element,Node>::VisitNode(Node *node)
 {
   node->Visit();
 }
@@ -159,7 +159,7 @@ void BinaryTree<E>::VisitNode(Node *node)
 
 
 
-void ExpressionTree::VisitNode(Node *node)
+void ExpressionTree::VisitNode(ExpressionTreeNode *node)
 {
   printf("%c", node->e);
 }
@@ -169,13 +169,13 @@ void ExpressionTree::LastIterBuild(const char *expr)
   if (NULL == expr){
     return;
   }
-  Node *node = NULL;
-  std::stack<Node*> node_stack;
+  ExpressionTreeNode *node = NULL;
+  std::stack<ExpressionTreeNode *> node_stack;
   while(const char c = *(expr++)){
     if (' ' == c){
       continue;
     }
-    node = new Node;
+    node = new ExpressionTreeNode;
     node->e = c;
     if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))){
       if (node_stack.empty()){
@@ -205,21 +205,21 @@ void ExpressionTree::LastIterBuild(const char *expr)
 
 
 
-template<class E>
-BinarySearchTree<E>::BinarySearchTree()
+template<typename Element, typename Node>
+BinarySearchTree<Element,Node>::BinarySearchTree()
 {
 
 }
 
-template<class E>
-BinarySearchTree<E>::~BinarySearchTree()
+template<typename Element, typename Node>
+BinarySearchTree<Element,Node>::~BinarySearchTree()
 {
 
 }
 
 
-template<class E>
-void BinarySearchTree<E>::Delete(const E &e, Node *tree)
+template<typename Element, typename Node>
+void BinarySearchTree<Element,Node>::Delete(const Element &e, Node *tree)
 {
   if (NULL == tree){
     return;
@@ -241,8 +241,8 @@ void BinarySearchTree<E>::Delete(const E &e, Node *tree)
   }
 }
 
-template<class E>
-bool BinarySearchTree<E>::Contrain(const E &e, Node *tree)
+template<typename Element, typename Node>
+bool BinarySearchTree<Element,Node>::Contrain(const Element &e, Node *tree)
 {
   if (NULL == tree){
     return false;
@@ -259,6 +259,18 @@ bool BinarySearchTree<E>::Contrain(const E &e, Node *tree)
 
 
 
+
+template<typename Element, typename Node>
+AVLTree<Element,Node>::AVLTree()
+{
+
+}
+
+template<typename Element, typename Node>
+AVLTree<Element,Node>::~AVLTree()
+{
+  
+}
 
 
 
