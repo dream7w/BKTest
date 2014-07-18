@@ -3,7 +3,7 @@
   @File        : src/chp04.h
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:30
-  @Modified    : 2014-07-18 17:17:59
+  @Modified    : 2014-07-18 17:27:11
   @Description : 树(tree)
 ==========================================*/
 
@@ -174,6 +174,15 @@ class BinarySearchTree : public BinaryTree<Element, Node>
     }
 };
 
+
+template<typename Element>
+struct AVLTreeNode
+{
+  Element e;
+  AVLTreeNode *left;
+  AVLTreeNode *right;
+  int hight;
+};
 
 
 template<typename Element, typename Node>
