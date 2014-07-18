@@ -3,7 +3,7 @@
   @File        : src/chp04.h
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:30
-  @Modified    : 2014-07-18 17:27:11
+  @Modified    : 2014-07-18 17:40:01
   @Description : 树(tree)
 ==========================================*/
 
@@ -31,6 +31,15 @@
 #include <stdlib.h>
 #include <deque>
 #include <stack>
+
+
+template<typename E>
+E max(const E &e1, const E &e2)
+{
+  return (e1 > e2 ? e1 : e2);
+}
+
+
 
 
 template<typename E>
@@ -181,7 +190,7 @@ struct AVLTreeNode
   Element e;
   AVLTreeNode *left;
   AVLTreeNode *right;
-  int hight;
+  int height;
 };
 
 
@@ -192,6 +201,8 @@ class AVLTree : public BinarySearchTree<Element, Node>
     AVLTree();
     ~AVLTree();
 
+    int Height(Node *node);
+    void Insert(const Element& e, Node *&node);
 };
 
 

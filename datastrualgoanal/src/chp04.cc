@@ -3,7 +3,7 @@
   @File        : src/chp04.cc
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:39
-  @Modified    : 2014-07-18 17:20:34
+  @Modified    : 2014-07-18 17:52:46
   @Description : 
 ==========================================*/
 
@@ -272,8 +272,35 @@ AVLTree<Element,Node>::~AVLTree()
   
 }
 
+template<typename Element, typename Node>
+int AVLTree<Element,Node>::Height(Node *node)
+{
+  return (NULL != node ? node->height : -1);
+}
 
 
+template<typename Element, typename Node>
+void AVLTree<Element,Node>::Insert(const Element& e, Node *&node)
+{
+  if (NULL == node){
+    node = new Node;
+    node->e = e;
+    node->left = NULL;
+    node->right = NULL;
+  }else if (e < node->e){
+    Insert(e, node->left);
+    if (Height(node->left) - Height(node->right) >= 2){
+      if (e < node->left->e){
+      }else{
+      }
+    }
+  }else if (e > node->e){
+    Insert(e, node->right);
+  }else{
+    return;
+  }
+  node->height = max(Height(node->left), Height(node->right)) + 1;
+}
 
 
 
