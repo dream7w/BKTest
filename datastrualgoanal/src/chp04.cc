@@ -3,12 +3,14 @@
   @File        : src/chp04.cc
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:39
-  @Modified    : 2014-07-18 17:52:46
+  @Modified    : 2014-07-31 18:30:43
   @Description : 
 ==========================================*/
 
 
 #include "chp04.h"
+#include <algorithm>
+
 
 
 template<typename Element, typename Node>
@@ -291,17 +293,80 @@ void AVLTree<Element,Node>::Insert(const Element& e, Node *&node)
     Insert(e, node->left);
     if (Height(node->left) - Height(node->right) >= 2){
       if (e < node->left->e){
+        //left-left
+        LLRoatate(node);
       }else{
+        //left-right
+        LRRoatate(node);
       }
     }
   }else if (e > node->e){
     Insert(e, node->right);
+    if (Height(node->right) - Height(node->left) >= 2){
+      if (e > node->right->e){
+        //right-right
+        RRRoatate(node);
+      }else{
+        //right-left
+        RLRoatate(node);
+      }
+    }
   }else{
     return;
   }
   node->height = max(Height(node->left), Height(node->right)) + 1;
 }
 
+template<typename Element, typename Node>
+void AVLTree<Element,Node>::SingleLeftRoatate(Node *&node)
+{
+  if (NULL == node){
+    return;
+  }
+  Node *left = node->left;
+  Node *right = left->right;
+  left->right = node;
+  node->left = right;
+  left->height = std::max(Height(left->left), Height(left->right)) + 1;
+  node->height = std::max(Height(node->left), Height(node->right)) + 1;
+  node = left;
+}
+
+template<typename Element, typename Node>
+void AVLTree<Element,Node>::DoubleLeftRoatate(Node *&node)
+{
+  if (NULL == node){
+    return;
+  }
+  SingleRightRoatate(node->left);
+  SingleLeftRoatate(node);
+}
+
+
+template<typename Element, typename Node>
+void AVLTree<Element,Node>::SingleRightRoatate(Node *&node)
+{
+  if (NULL == node){
+    return;
+  }
+  Node *right = node->right;
+  Node *left = right->left;
+  right->left = node;
+  node->right = left;
+  right->height = std::max(Height(right->left), Height(right->right)) + 1;
+  node->height = std::max(Height(node->left), Height(node->right)) + 1;
+  node = right;
+}
+
+template<typename Element, typename Node>
+void AVLTree<Element,Node>::DoubleRightRoatate(Node *&node)
+{
+  if (NULL == node){
+    return;
+  }
+  SingleLeftRoatate(node->right);
+  SingleRightRoatate(node);
+}
 
 
 

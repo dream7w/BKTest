@@ -3,7 +3,7 @@
   @File        : src/chp04.h
   @Encoding    : utf-8
   @Create      : 2014-07-17 10:48:30
-  @Modified    : 2014-07-18 17:40:01
+  @Modified    : 2014-07-31 18:29:17
   @Description : 树(tree)
 ==========================================*/
 
@@ -203,6 +203,12 @@ class AVLTree : public BinarySearchTree<Element, Node>
 
     int Height(Node *node);
     void Insert(const Element& e, Node *&node);
+
+  protected:
+    void SingleLeftRoatate(Node *&node);
+    void DoubleLeftRoatate(Node *&node);
+    void SingleRightRoatate(Node *&node);
+    void DoubleRightRoatate(Node *&node);
 };
 
 
